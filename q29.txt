@@ -1,0 +1,43 @@
+class Solution:
+    def removeZeroSumSublists(self, head: ListNode) -> ListNode:
+        # Create a dummy node to init the search
+        pointer = ListNode(float("inf"))
+        # Point the dummy node to the head of the list
+        pointer.next = head
+        # create a reference to the given list and point the head to the dummy node
+        curr = head
+        head = pointer
+
+        # Iterate over the node
+        while head:
+            # Store the current sum
+            current_sum = 0
+
+            # For each node compute the consecutive sum
+            while curr:
+                # Add the value of the node to the current sum
+                current_sum += curr.val
+
+                # If the consecutive sum is 0
+                # Delete the reference to the
+                # nodes that sum up to 0
+                if current_sum == 0:
+                    head.next = curr.next
+
+                # Move to the next node
+                curr = curr.next
+
+            # Move the head
+            head = head.next
+
+            # Update the current node
+            # to be the next element 
+            # of the head. This resets
+            # the "state" as in the start
+            if head:
+                curr = head.next
+
+        # Return the next element of the 
+        # dummy pointer, which is going
+        # to be the updated head of the list
+        return pointer.next            

@@ -1,0 +1,33 @@
+class Solution:
+    def partition(self, head, x):
+        # h1,h2: Linked Lists with numbers Lower and GEQ (greater or equal) than X respectively
+        h1, h2 = None, None
+        # -------------------------------------------------------------------
+        #     Main Loop (Iterate through Linked List starting at Head)
+        # -------------------------------------------------------------------
+        n      = head
+        while n:
+            if n.val<x:
+                if h1:
+                    n1.next = n
+                else:
+                    h1      = n
+                n1 = n
+            else:
+                if h2:
+                    n2.next = n
+                else:
+                    h2      = n
+                n2 = n
+            n = n.next
+        # -------------------------------------------------------------------
+        #     Fix Tails
+        # -------------------------------------------------------------------
+        if h1:
+            n1.next = h2
+        if h2:
+            n2.next = None
+        # -------------------------------------------------------------------
+        #     Try to Return Non-Empty Linked List
+        # -------------------------------------------------------------------
+        return h1 or h2

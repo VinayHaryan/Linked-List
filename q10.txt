@@ -1,0 +1,17 @@
+class Solution:
+    def getIntersectionNode(self, headA: ListNode, headB: ListNode) -> ListNode:
+        i = headA
+        j = headB
+        
+        while (i != j):
+            if  i: # not reach end of the list
+                i = i.next
+            else: # reach eand of the list
+                i = headB
+                
+            if j:
+                j = j.next
+            else:
+                j = headA
+                
+        return i

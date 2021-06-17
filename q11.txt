@@ -1,0 +1,14 @@
+class Solution:
+    def hasCycle(self, head: ListNode) -> bool:
+        
+        slow = head 
+        fast = head
+        while (fast):
+            slow = slow.next
+            if (fast.next):
+                fast = fast.next.next
+            else:
+                return False
+            if (slow == fast):
+                return True
+        return False

@@ -1,0 +1,41 @@
+class Solution:
+    def sortList(self, head: ListNode) -> ListNode:
+        ## RC ##
+        ## APPROACH : MERGE SORT ##
+        ## Similar to Leetcode: 21. Merge Two Sorted Lists ##
+        ## Similar to Leetcode: 876. Middle of the Linked List ##
+        
+		## TIME COMPLEXITY : O(NlogN) ##
+		## SPACE COMPLEXITY : O(1) ##
+
+        def mergeSort(head):
+            if not head or not head.next : 
+                return head                 # as we branch and move left, left ... when only one node is left, we return it
+            
+            left = slow = fast = head
+            fast = fast.next                # for [1,2,3,4] as mid will be node 3, if this statement not used
+            while fast and fast.next:
+                slow = slow.next
+                fast = fast.next.next
+                
+            right = slow.next               # slow is at middle, next elements are considered right
+            slow.next = None                # this makes left has only left part
+            
+            left_sorted = mergeSort(left)
+            right_sorted = mergeSort(right)
+            return merge(left_sorted, right_sorted)
+        
+        def merge(l1, l2):
+            dummy = ListNode(-1)
+            prev = dummy
+            while l1 and l2:
+                if l1.val <= l2.val:
+                    prev.next = l1
+                    l1 = l1.next
+                else:
+                    prev.next = l2
+                    l2 = l2.next            
+                prev = prev.next
+            prev.next = l1 or l2    # one of l1 and l2 can be non-null at this point
+            return dummy.next
+        return mergeSort(head)

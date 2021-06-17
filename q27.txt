@@ -1,0 +1,105 @@
+class Solution:
+    def reverseBetween(self, head: ListNode, m: int, n: int) -> ListNode:
+        pos = 1
+
+        curr = head
+        prev: ListNode = None
+
+        #  # iterate till the position where we find the section to be reversed
+        while pos < m:
+            # move to next node
+            prev = curr
+            curr = curr.next
+
+            pos += 1
+
+        # store the last non reversed(not to be reversed) node
+        last_none_reversed_node = prev
+        # will be the tail of the last reversed list
+        reversed_list_tail = curr
+
+        #  # revese a section of the list
+        while pos <= n:
+            nxt = curr.next
+
+            # reverse pointer
+            curr.next = prev
+
+            # move on to next node
+            prev = curr
+            curr = nxt
+
+            pos += 1
+
+        # # fix the reversed list position in the larger list
+        if last_none_reversed_node is not None:
+            # last_none_reversed_node.next = last revered node
+            last_none_reversed_node.next = prev
+        # handle situation where we reversed from 1
+        else:
+            # if we started reversing from 1, then the last item reversed will be put at 1 (head)
+            head = prev
+
+        # connect the reversed list's tail to the the (n+1) node
+        reversed_list_tail.next = curr
+
+        return head
+		
+		
+---------------------------------------------------------------------------------------------------------------------------------------------------------
+
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def reverseBetween(self, head: ListNode, left: int, right: int) -> ListNode:
+        
+        pos = 1
+        curr = head
+        prev : ListNode = None
+        
+        while pos < left:
+            prev = curr
+            curr = curr.next
+            pos += 1
+            
+        last_none_reversd_node = prev
+        reversed_list_tail = curr
+        
+        while pos <= right:
+            nxt = curr.next
+            
+            # reverse pointer
+            curr.next = prev
+            
+            # move on to next node
+            prev = curr
+            curr = nxt
+            
+            pos += 1
+            
+        if last_none_reversd_node is not None:
+            last_none_reversd_node.next = prev
+        else:
+            head = prev
+            
+        reversed_list_tail.next = curr
+        
+        return head
+    
+            
+        
+            
+        
+        
+        
+            
+        
+    
+        
+        
+        
+        
+        

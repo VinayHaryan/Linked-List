@@ -1,0 +1,11 @@
+class Solution:
+    def numComponents(self, head: ListNode, G: List[int]) -> int:
+        G = set(G)
+        n = head
+        out = len(G)
+        
+        while n and n.next:
+            if (n.val in G) and (n.next.val in G):
+                out-=1
+            n=n.next
+        return out

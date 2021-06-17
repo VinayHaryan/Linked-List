@@ -1,0 +1,23 @@
+Given:
+prev->a->b->c
+
+Change it to:
+prev->b->a->c
+
+Since the first node does not have any previous node, we create a dummy node at the beginning.
+
+class Solution:
+    def swapPairs(self, head: ListNode) -> ListNode:
+
+        dummy = prev = ListNode(0)
+        prev.next = head
+		
+        while prev.next and prev.next.next:
+            a = prev.next
+            b = prev.next.next
+            c = prev.next.next.next
+            prev.next = b
+            prev.next.next = a
+            prev.next.next.next = c
+            prev = prev.next.next
+        return dummy.next

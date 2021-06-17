@@ -1,0 +1,53 @@
+class Solution:
+    def mergeInBetween(self, list1: ListNode, a: int, b: int, list2: ListNode) -> ListNode:
+        
+#                 """
+#         Given linked lists list1 and list2, and indexes a and b,
+#         this program replaces the nodes in list1 indexed by a
+#         through b with list2.
+
+#         :param list1: destination linked list for merger
+#         :type list1: ListNode
+#         :param a: left index of node in list1
+#         :type a: int
+#         :param b: right index of node in list1
+#         :type b: int
+#         :param list2: linked list to be merged into list1
+#         :type list2: ListNode
+#         :return: merged linked list
+#         :rtype: ListNode
+#         """
+
+#         """
+#         Find the node in list1 that is indexed by a. Set a_node
+#         to the node preceding the node indexed by a.
+#         """
+        node = list1
+        index_1 = 1
+        while index_1 < a:
+            node = node.next
+            index_1 += 1
+        a_node = node
+
+        """
+        Find the node in list1 that is indexed by b. Set b_node
+        to the node following the node indexed by b.
+        """
+        node = node.next
+        while index_1 < b:
+            node = node.next
+            index_1 += 1
+        b_node = node.next
+
+        """
+        - Disconnect nodes a through b in list1.
+        - Connect a_node to the start of list2.
+        - Connect end of list2 to b_node
+        """
+        node.next = None
+        a_node.next = list2
+        node = list2
+        while node.next:
+            node = node.next
+        node.next = b_node
+        return list1
